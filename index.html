@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        #game {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body onkeypress="kopalkeypress(event)">
+    <canvas id="game" width="360" height="210"></canvas>
+    <hr>
+    <input  id="tl" type="file">
+    <button onclick="loadGame()">Load game</button>
+    <script src='kopal.js'></script>
+    <script src="index.js"></script>
+    <script id="loaded"></script>
+</body>
+
+</html>
