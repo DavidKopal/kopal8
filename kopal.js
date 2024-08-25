@@ -1,11 +1,11 @@
 let canv = document.getElementById('game')
 let ctx = canv.getContext('2d')
 
-this.Game = {}
+let Game = {}
 for (let x = 0; x <= 35; x++) {
-    this.Game[x] = {}
+    Game[x] = {}
     for (let y = 0; y <= 20; y++) {
-        this.Game[x][y] = {
+        Game[x][y] = {
             color: 'RESET',
             x: x,
             y: y,
