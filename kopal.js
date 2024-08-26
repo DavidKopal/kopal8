@@ -104,12 +104,12 @@ function kopalcanvclick(event) {
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
 
-    const gridX = Math.floor(mouseX / 10);
-    const gridY = Math.floor(mouseY / 10);
+    const gx = Math.floor((mouseX - 15) / 10);
+    const gy = Math.floor((mouseY - 15) / 10);
 
-    if (gridX >= 0 && gridX <= 50 && gridY >= 0 && gridY <= 35) {
+    if (gx >= 0 && gx <= 50 && gy >= 0 && gy <= 35) {
         canvClicks.forEach(func => {
-            func(gridX, gridY)
+            func(gx, gy)
         })
     }
 }
