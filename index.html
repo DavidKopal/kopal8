@@ -1,59 +1,195 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Kopal8</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <style>
+        @font-face {
+            font-family: 'Pixel';
+            src: url('font.ttf') format('truetype');
+        }
+
         body {
-            font-family: Pixel;
+            font-family: 'Pixel', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #kopal8 {
+            background-color: #c0c0c0;
+            border-radius: 15px;
+            padding: 40px 20px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), inset -5px -5px 15px rgba(0, 0, 0, 0.2), inset 5px 5px 15px rgba(255, 255, 255, 0.5);
+            width: 550px;
+            position: relative;
         }
 
         #game {
-            border: 2px solid black;
+            border: 15px solid #8b8b8b;
+            border-radius: 10px 10px 30px 10px;
+            background-color: #000000;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .button {
-            border: 1px solid black;
-            border-radius: 100px;
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            font-family: Pixel;
+            border: 2px solid #4a4a4a;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-family: 'Pixel', monospace;
             font-size: 20px;
+            font-weight: bold;
+            color: #4a4a4a;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset -2px -2px 5px rgba(0, 0, 0, 0.2), inset 2px 2px 5px rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        #hr {
-            margin-top: 180px;
+        .button:active {
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3), inset -1px -1px 3px rgba(0, 0, 0, 0.2), inset 1px 1px 3px rgba(255, 255, 255, 0.5);
+            transform: translateY(2px);
         }
 
-        @font-face {
-            font-family: Pixel;
-            src: url(font.ttf);
+        #buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        #dpad, #wasd {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            width: 180px;
+        }
+
+        #start-select {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .start-select-button {
+            width: 70px;
+            height: 25px;
+            background-color: #8b8b8b;
+            border: none;
+            border-radius: 15px;
+            transform: rotate(-25deg);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), inset -2px -2px 5px rgba(0, 0, 0, 0.2), inset 2px 2px 5px rgba(255, 255, 255, 0.5);
+        }
+
+        #fupl {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #tl {
+            display: none;
+        }
+
+        #flabel {
+            font-family: 'Pixel', monospace;
+            background-color: #8b8b8b;
+            color: #c0c0c0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #brand {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            font-size: 24px;
+            color: #4a4a4a;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        #speaker {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .speakerhole {
+            width: 5px;
+            height: 30px;
+            background-color: #4a4a4a;
+            border-radius: 2px;
         }
     </style>
 </head>
-
 <body>
-    <canvas onclick="kopalcanvclick(event)" id="game" width="510" height="360"></canvas>
-    <br>
-    <button onclick="kopalkeypress('A')" class="button" style="background-color: cyan; margin-top: 50px;">A</button>
-    <button onclick="kopalkeypress('W')" class="button" style="background-color: red;margin-left: 50px;">W</button>
-    <button onclick="kopalkeypress('S')" class="button" style="background-color: yellow;margin-left: 50px;margin-top: 100px;">S</button>
-    <button onclick="kopalkeypress('D')" class="button" style="background-color: lime;margin-top: 50px; margin-left: 100px;">D</button>
-    <button onclick="kopalkeypress('LEFT')" class="button" style="background-color: grey; margin-top: 50px;  margin-left: 360px;">←</button>
-    <button onclick="kopalkeypress('UP')" class="button" style="background-color: grey;margin-left: 410px;">↑</button>
-    <button onclick="kopalkeypress('DOWN')" class="button" style="background-color: grey;margin-left: 410px;margin-top: 100px;">↓</button>
-    <button onclick="kopalkeypress('RIGHT')" class="button" style="background-color: grey;margin-top: 50px; margin-left: 460px;">→</button>
-    <hr id="hr">
-    <input id="tl" type="file">
-    <button onclick="loadGame()">Load game</button>
-    <hr>
+    <div id="kopal8">
+        <canvas onclick="kopalcanvclick(event)" id="game" width="510" height="360"></canvas>
+        <div id="buttons">
+            <div id="dpad">
+                <div></div>
+                <button onclick="kopalkeypress('UP')" class="button">↑</button>
+                <div></div>
+                <button onclick="kopalkeypress('LEFT')" class="button">←</button>
+                <div></div>
+                <button onclick="kopalkeypress('RIGHT')" class="button">→</button>
+                <div></div>
+                <button onclick="kopalkeypress('DOWN')" class="button">↓</button>
+                <div></div>
+            </div>
+            <div id="wasd">
+                <div></div>
+                <button onclick="kopalkeypress('W')" class="button" style="background-color: #ff0000;">W</button>
+                <div></div>
+                <button onclick="kopalkeypress('A')" class="button" style="background-color: #00ffff;">A</button>
+                <div></div>
+                <button onclick="kopalkeypress('D')" class="button" style="background-color: #00ff00;">D</button>
+                <div></div>
+                <button onclick="kopalkeypress('S')" class="button" style="background-color: #ffff00;">S</button>
+                <div></div>
+            </div>
+        </div>
+        <div id="start-select">
+            <button class="start-select-button"></button>
+            <button class="start-select-button"></button>
+        </div>
+        <div id="fupl">
+            <input type="file" id="tl" accept=".js" onchange="hfs(event)">
+            <label for="tl" id="flabel">LOAD GAME</label>
+        </div>
+        <div id="brand">KOPAL-8 - <a href="gamelist.html">GAMELIST</a></div>
+        <div id="speaker">
+            <div class="speakerhole"></div>
+            <div class="speakerhole"></div>
+            <div class="speakerhole"></div>
+            <div class="speakerhole"></div>
+            <div class="speakerhole"></div>
+            <div class="speakerhole"></div>
+        </div>
+    </div>
     <script src='kopal.js'></script>
     <script src="index.js"></script>
     <script id="loaded"></script>
+    <script>
+        function hfs(event) {
+            const f = event.target.files[0];
+            if (f) {
+                loadGame();
+            }
+        }
+    </script>
 </body>
-
 </html>

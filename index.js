@@ -1,11 +1,11 @@
 function loadGame() {
-  var fi = document.getElementById('tl');
-  var f = fi.files[0];
+  let fi = document.getElementById('tl');
+  let f = fi.files[0];
 
   if (f) {
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onload = function (event) {
-      var content = event.target.result;
+      let content = event.target.result;
       Texts = {}
       msPassed = 0
       secPassed = 0
@@ -20,8 +20,19 @@ function loadGame() {
             color: 'RESET',
             x: x,
             y: y,
-            ChangeColor: function (color) {
-              this.color = color
+            props: {},
+            SetProperty: function (property, value) {
+              this.props[property] = value
+            },
+            RemoveProperty: function (property) {
+              if (property in this.props) {
+                delete this.props[property]
+              }
+            },
+            GetProperty: function (property) {
+              if (property in this.props) {
+                return this.props[property]
+              }
             }
           }
         }
@@ -31,5 +42,22 @@ function loadGame() {
     reader.readAsText(f);
   } else {
     console.error('???game loading error???');
+  }
+
+  fi.remove()
+  document.getElementById('flabel').remove()
+}
+
+window.onload = () => {
+  if (localStorage.getItem('games')) {
+    let games = JSON.parse(localStorage.getItem('games'))
+    if (games.length <= 0) return;
+    games.forEach(game => {
+      let script = document.createElement('script')
+      script.src = 'games/' + game + '.js '
+      document.body.appendChild(script)
+    })
+    document.getElementById('tl').remove()
+    document.getElementById('flabel').remove()
   }
 }

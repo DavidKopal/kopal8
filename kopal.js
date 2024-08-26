@@ -10,8 +10,21 @@ for (let x = 0; x <= 50; x++) {
             x: x,
             y: y,
             props: {},
-            ChangeColor: function (color) {
-                this.color = color
+            SetProperty: function (property, value) {
+                this.props[property] = value
+            },
+            RemoveProperty: function (property) {
+                if (property in this.props) {
+                    delete this.props[property]
+                }
+            },
+            GetProperty: function (property) {
+                if (property in this.props) {
+                    return this.props[property]
+                }
+            },
+            GetCoords: function () {
+                return [x, y]
             }
         }
     }
@@ -134,8 +147,10 @@ const Kopal8 = {
         },
         MoveKopalxel: (x1, y1, x2, y2) => {
             if (x1 in Game && y1 in Game && x2 in Game && y2 in Game) {
-                Game[x2][y2].ChangeColor(Game[x1][y1].color)
-                Game[x1][y1].ChangeColor('RESET')
+                Game[x2][y2].props = { ...Game[x1][y1].props }
+                Game[x2][y2].color = Game[x1][y1].color
+                Game[x1][y1].color = 'RESET'
+                Game[x1][y1].props = {}
             }
         }
     },
@@ -146,32 +161,24 @@ const Kopal8 = {
             }
         },
         CreateText: (content, color, x, y, id = Object.keys(Texts).length) => {
-            Texts[id] = {
-                content: content,
-                color: color,
-                x: x,
-                y: y
-            }
-        },
-        AddProperty: (x, y, property, value) => {
             if (x in Game && y in Game[x]) {
-                Game[x][y].props[property] = value
+                Texts[id] = {
+                    content: content,
+                    color: color,
+                    x: x*10,
+                    y: (y*10) +10
+                }
             }
         },
-        RemoveProperty: (x, y, property) => {
-            if (x in Game && y in Game[x] && property in Game[x][y].props) {
-                delete Game[x][y].props[property]
-            }
-        },
-        GetProperty: (x, y, property) => {
-            if (x in Game && y in Game[x] && property in Game[x][y].props) {
-                return Game[x][y].props[property]
-            }
-        }
     },
     Update: {
         OnUpdate: func => {
             UpdateFuncs.push(func)
+        }
+    },
+    Random: {
+        inRange: (min, max) => {
+            return Math.floor(Math.random() * (max - min + 1)) + min
         }
     }
 }
