@@ -7,17 +7,50 @@
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <style>
+        body {
+            font-family: Pixel;
+        }
+
         #game {
             border: 2px solid black;
+        }
+
+        .button {
+            border: 1px solid black;
+            border-radius: 100px;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            font-family: Pixel;
+            font-size: 20px;
+        }
+
+        #hr {
+            margin-top: 180px;
+        }
+
+        @font-face {
+            font-family: Pixel;
+            src: url(font.ttf);
         }
     </style>
 </head>
 
-<body onkeypress="kopalkeypress(event)">
-    <canvas id="game" width="360" height="210"></canvas>
-    <hr>
-    <input  id="tl" type="file">
+<body>
+    <canvas onclick="kopalcanvclick(event)" id="game" width="510" height="360"></canvas>
+    <br>
+    <button onclick="kopalkeypress('A')" class="button" style="background-color: cyan; margin-top: 50px;">A</button>
+    <button onclick="kopalkeypress('W')" class="button" style="background-color: red;margin-left: 50px;">W</button>
+    <button onclick="kopalkeypress('S')" class="button" style="background-color: yellow;margin-left: 50px;margin-top: 100px;">S</button>
+    <button onclick="kopalkeypress('D')" class="button" style="background-color: lime;margin-top: 50px; margin-left: 100px;">D</button>
+    <button onclick="kopalkeypress('LEFT')" class="button" style="background-color: grey; margin-top: 50px;  margin-left: 360px;">←</button>
+    <button onclick="kopalkeypress('UP')" class="button" style="background-color: grey;margin-left: 410px;">↑</button>
+    <button onclick="kopalkeypress('DOWN')" class="button" style="background-color: grey;margin-left: 410px;margin-top: 100px;">↓</button>
+    <button onclick="kopalkeypress('RIGHT')" class="button" style="background-color: grey;margin-top: 50px; margin-left: 460px;">→</button>
+    <hr id="hr">
+    <input id="tl" type="file">
     <button onclick="loadGame()">Load game</button>
+    <hr>
     <script src='kopal.js'></script>
     <script src="index.js"></script>
     <script id="loaded"></script>
