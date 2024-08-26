@@ -10,20 +10,20 @@ for (let x = 0; x <= 50; x++) {
             x: x,
             y: y,
             props: {},
-            SetProperty: function (property, value) {
+            SetProperty: function (property, value) { // Sets an property.
                 this.props[property] = value
             },
-            RemoveProperty: function (property) {
+            RemoveProperty: function (property) { // Removes an property.
                 if (property in this.props) {
                     delete this.props[property]
                 }
             },
-            GetProperty: function (property) {
+            GetProperty: function (property) { // Returns an property.
                 if (property in this.props) {
                     return this.props[property]
                 }
             },
-            GetCoords: function () {
+            GetCoords: function () { // Returns the coords of the Kopaxel.
                 return [x, y]
             }
         }
@@ -31,8 +31,8 @@ for (let x = 0; x <= 50; x++) {
 }
 let Texts = {}
 
-let msPassed = 0
-let secPassed = 0
+let msPassed = 0 // Sec passed since start
+let secPassed = 0 // Milisec passed since start
 
 let Keybinds = {}
 let anyKeybinds = []
@@ -41,7 +41,7 @@ let UpdateFuncs = []
 
 let canvClicks = []
 
-function kopalkeypress(key) {
+function kopalkeypress(key) { // Don't use.
     key = Kopal8.Input.Button[key].toUpperCase()
     if (key in Keybinds) {
         Keybinds[key]()
@@ -53,8 +53,8 @@ function kopalkeypress(key) {
     }
 }
 
-function Color(color) {
-    let Colors = {
+function Color(color) { // Used to get colors, do NOT use this unless you know what you're doing.
+    let Colors = { // Colors list, very useful (RESET = black)
         RED: '#ff0000',
         BLUE: '#0000ff',
         GREEN: '#00ff00',
@@ -76,7 +76,7 @@ function Color(color) {
     }
 }
 
-function Update() {
+function Update() { // Game update function.
     ctx.clearRect(0, 0, canv.width, canv.height)
     UpdateFuncs.forEach(func => {
         func()
@@ -98,7 +98,7 @@ function Update() {
     }
 }
 
-function kopalcanvclick(event) {
+function kopalcanvclick(event) { // Don't use.
     const rect = canv.getBoundingClientRect();
 
     const mouseX = event.clientX - rect.left;
@@ -114,10 +114,10 @@ function kopalcanvclick(event) {
     }
 }
 
-const Kopal8 = {
+const Kopal8 = { // Main engine and functions
     Input: {
         Button: {
-            W: 'leftUP',
+            W: 'leftUP', // Pretty self explanatory.
             A: 'leftLEFT',
             S: 'leftDOWN',
             D: 'leftRIGHT',
@@ -125,8 +125,8 @@ const Kopal8 = {
             LEFT: 'rightLEFT',
             DOWN: 'rightDOWN',
             RIGHT: 'rightRIGHT',
-            onClick: (key, func) => {
-                if (key !== 'any') {
+            onClick: (key, func) => { // Used to run something when an button is clicked. use like Kopal8.Input.Button.W for the key.
+                if (key !== 'any') { // Runs if any key is pressed
                     Keybinds[key.toUpperCase()] = func
                 } else {
                     anyKeybinds.push(func)
@@ -134,18 +134,18 @@ const Kopal8 = {
             }
         },
         Mouse: {
-            onClick: (func) => {
+            onClick: (func) => { // Runs something when clicked on game, make sure to include 2 args in the func. (x, y)
                 canvClicks.push(func)
             }
         }
     },
     Kopaxel: {
-        GetKopalxel: (x, y) => {
+        GetKopaxel: (x, y) => { // Returns an Kopaxel
             if (x in Game && y in Game[x]) {
                 return Game[x][y]
             }
         },
-        MoveKopalxel: (x1, y1, x2, y2) => {
+        MoveKopaxel: (x1, y1, x2, y2) => { // Moves an Kopaxel
             if (x1 in Game && y1 in Game && x2 in Game && y2 in Game) {
                 Game[x2][y2].props = { ...Game[x1][y1].props }
                 Game[x2][y2].color = Game[x1][y1].color
@@ -155,12 +155,12 @@ const Kopal8 = {
         }
     },
     Text: {
-        GetText: (id) => {
+        GetText: (id) => { // Gets an text based off an text id
             if (id in Texts) {
                 return Texts[id]
             }
         },
-        CreateText: (content, color, x, y, id = Object.keys(Texts).length) => {
+        CreateText: (content, color, x, y, id = Object.keys(Texts).length) => { // Creates an text
             if (x in Game && y in Game[x]) {
                 Texts[id] = {
                     content: content,
@@ -172,12 +172,12 @@ const Kopal8 = {
         },
     },
     Update: {
-        OnUpdate: func => {
+        OnUpdate: func => { // Runs something every update. (milisecond)
             UpdateFuncs.push(func)
         }
     },
     Random: {
-        inRange: (min, max) => {
+        inRange: (min, max) => { // Returns a random number in range.
             return Math.floor(Math.random() * (max - min + 1)) + min
         }
     }

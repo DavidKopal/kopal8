@@ -1,7 +1,7 @@
 let pcolor = 'RED'
 
 Kopal8.Input.Mouse.onClick((x,y) => {
-    let kxl = Kopal8.Kopaxel.GetKopalxel(x, y)
+    let kxl = Kopal8.Kopaxel.GetKopaxel(x, y)
     if (kxl.color !== 'RESET') {
         kxl.color = 'RESET'
     } else {
