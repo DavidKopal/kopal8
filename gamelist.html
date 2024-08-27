@@ -47,6 +47,11 @@
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
+        #tablediv {
+            height: 450px;
+            overflow-y: scroll;
+        }
+
         th, td {
             padding: 10px;
             text-align: left;
@@ -60,6 +65,11 @@
         th {
             font-size: 30px;
             background-color: cyan;
+        }
+
+        #category {
+            font-size: 30px;
+            background-color: magenta;
         }
 
         #brand {
@@ -145,24 +155,50 @@
             <input type="text" id="ginp" class="inp2" placeholder="Enter game name...">
             <button onclick="add()" class="button">ADD</button>
         </div>
-        <table>
-            <tr>
-                <th>Game Name</th>
-                <th>Creator</th>
-            </tr>
-            <tr>
-                <td>applecatcher</td>
-                <td><a style="color: cyan">Kopal-8</a></td>
-            </tr>
-            <tr>
-                <td>movement</td>
-                <td><a style="color: cyan">Kopal-8</a></td>
-            </tr>
-            <tr>
-                <td>paint</td>
-                <td><a style="color: cyan">Kopal-8</a></td>
-            </tr>
-        </table>
+        <div id="tablediv">
+            <table>
+                <tr>
+                    <th>Game Name</th>
+                    <th>Creator</th>
+                </tr>
+                <tr>
+                    <th id="category">Fun</th>
+                    <th id="category"></th>
+                </tr>
+                <tr>
+                    <td>applecatcher</td>
+                    <td><a style="color: cyan">Kopal-8</a></td>
+                </tr>
+                <tr>
+                    <td>movement</td>
+                    <td><a style="color: cyan">Kopal-8</a></td>
+                </tr>
+                <tr>
+                    <td>paint</td>
+                    <td><a style="color: cyan">Kopal-8</a></td>
+                </tr>
+                <tr>
+                    <td>sandbox</td>
+                    <td>ArcadeCat1</td>
+                </tr>
+                <tr>
+                    <th id="category">Tools</th>
+                    <th id="category"></th>
+                </tr>
+                <tr>
+                    <td>bookshelf</td>
+                    <td><a style="color: cyan">Kopal-8</a></td>
+                </tr>
+                <tr>
+                    <td>morecolors <a><br> -> (paint/sandbox required)</a></td>
+                    <td><a style="color: cyan">Kopal-8</a></td>
+                </tr>
+                <tr>
+                    <th id="category">Installed</th>
+                    <th id="category"></th>
+                </tr>
+            </table>
+        </div>
         <hr>
         <div id="brand">KOPAL-8 - <a style="text-decoration: none; color: cyan" href="index.html">CONSOLE</a></div>
         <br>
