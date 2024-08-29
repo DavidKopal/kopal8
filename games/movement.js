@@ -2,7 +2,6 @@ let player = Kopal8.Kopaxel.GetKopaxel(3, 7)
 
 player.color = 'RED'
 
-
 Kopal8.Input.Button.onClick(Kopal8.Input.Button.W, () => {
     if (player.y -1 >= 0) {
         Kopal8.Kopaxel.MoveKopaxel(player.x, player.y, player.x, player.y -1)

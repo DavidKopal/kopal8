@@ -41,19 +41,30 @@ let UpdateFuncs = []
 
 let canvClicks = []
 
+const cooldowns = {};
+
 function kopalkeypress(key) { // Don't use.
-    key = Kopal8.Input.Button[key].toUpperCase()
+    if (key.includes('ARROW')) key = key.replace('ARROW', '');
+    if (!(key in Kopal8.Input.Button)) return;
+    key = Kopal8.Input.Button[key].toUpperCase();
+
+    const now = Date.now();
+    if (key in cooldowns && now - cooldowns[key] < 250) return;
+
+    cooldowns[key] = now;
+
     if (key in Keybinds) {
-        Keybinds[key]()
+        Keybinds[key]();
     }
     if (anyKeybinds.length > 0) {
         anyKeybinds.forEach(func => {
-            func(key)
-        })
+            func(key);
+        });
     }
 }
 
-function Color(color) { // Used to get colors, do NOT use this unless you know what you're doing.
+
+function Color(color) { // Used to get colors.
     let Colors = { // Colors list, very useful (RESET = black)
         RED: '#ff0000',
         BLUE: '#0000ff',
@@ -66,6 +77,7 @@ function Color(color) { // Used to get colors, do NOT use this unless you know w
         PINK: '#ffc0cb',
         BROWN: '#a52a2a',
         GRAY: '#808080',
+        K8COLOR: '#c0c0c0',
         WHITE: '#ffffff',
         RESET: '#000000'
     }
@@ -183,5 +195,78 @@ const Kopal8 = { // Main engine and functions
     }
 }
 
+let tindex = 0
+let themes = [
+    {
+        'kopal8': 'K8COLOR',
+        'w': 'RED',
+        'a': 'CYAN',
+        's': 'YELLOW',
+        'd': 'GREEN',
+        'up': 'WHITE',
+        'left': 'WHITE',
+        'down': 'WHITE',
+        'right': 'WHITE',
+    },
+    {
+        'kopal8': 'RESET',
+        'w': 'WHITE',
+        'a': 'WHITE',
+        's': 'WHITE',
+        'd': 'WHITE',
+        'up': 'WHITE',
+        'left': 'WHITE',
+        'down': 'WHITE',
+        'right': 'WHITE',
+    },
+    {
+        'kopal8': 'ORANGE',
+        'w': 'RED',
+        'a': 'MAGENTA',
+        's': 'YELLOW',
+        'd': 'PINK',
+        'up': 'WHITE',
+        'left': 'WHITE',
+        'down': 'WHITE',
+        'right': 'WHITE',
+    },
+    {
+        'kopal8': 'BLUE',
+        'w': 'CYAN',
+        'a': 'GREEN',
+        's': 'PURPLE',
+        'd': 'MAGENTA',
+        'up': 'WHITE',
+        'left': 'WHITE',
+        'down': 'WHITE',
+        'right': 'WHITE',
+    },
+    {
+        'kopal8': 'BROWN',
+        'w': 'GREEN',
+        'a': 'ORANGE',
+        's': 'YELLOW',
+        'd': 'GRAY',
+        'up': 'WHITE',
+        'left': 'WHITE',
+        'down': 'WHITE',
+        'right': 'WHITE',
+    }        
+]
+function ForceTheme(props) {
+    let ids = ['kopal8', 'w', 'a', 's', 'd', 'up', 'down', 'left', 'right']
+    for (let prop in props) {
+        if (!ids.includes(prop)) return;
+        document.getElementById(prop).style.backgroundColor = Color(props[prop])
+    }
+}
+function AddTheme(props) {
+    themes.push(props)
+}
+function kopalchangetheme() {
+    tindex++
+    if (tindex == themes.length) tindex = 0;
+    ForceTheme(themes[tindex])
+}
 
 setInterval(Update, 1)

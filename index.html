@@ -116,30 +116,30 @@
         }
     </style>
 </head>
-<body>
+<body onkeydown="kopalkeypress(event.key.toUpperCase())">
     <div id="kopal8">
         <canvas onclick="kopalcanvclick(event)" id="game" width="510" height="360"></canvas>
         <div id="buttons">
             <div id="dpad">
                 <div></div>
-                <button onclick="kopalkeypress('UP')" class="button">↑</button>
+                <button style="background-color: #ffffff;" id="up" onclick="kopalkeypress('UP')" class="button">↑</button>
                 <div></div>
-                <button onclick="kopalkeypress('LEFT')" class="button">←</button>
+                <button style="background-color: #ffffff;" id="left" onclick="kopalkeypress('LEFT')" class="button">←</button>
                 <div></div>
-                <button onclick="kopalkeypress('RIGHT')" class="button">→</button>
+                <button style="background-color: #ffffff;" id="right" onclick="kopalkeypress('RIGHT')" class="button">→</button>
                 <div></div>
-                <button onclick="kopalkeypress('DOWN')" class="button">↓</button>
-                <div></div>
+                <button style="background-color: #ffffff;" id="down" onclick="kopalkeypress('DOWN')" class="button">↓</button>
             </div>
+            <button id="theme" onclick="kopalchangetheme()" class="button">THEME</button>
             <div id="wasd">
                 <div></div>
-                <button onclick="kopalkeypress('W')" class="button" style="background-color: #ff0000;">W</button>
+                <button id="w" onclick="kopalkeypress('W')" class="button" style="background-color: #ff0000;">W</button>
                 <div></div>
-                <button onclick="kopalkeypress('A')" class="button" style="background-color: #00ffff;">A</button>
+                <button id="a" onclick="kopalkeypress('A')" class="button" style="background-color: #00ffff;">A</button>
                 <div></div>
-                <button onclick="kopalkeypress('D')" class="button" style="background-color: #00ff00;">D</button>
+                <button id="d" onclick="kopalkeypress('D')" class="button" style="background-color: #00ff00;">D</button>
                 <div></div>
-                <button onclick="kopalkeypress('S')" class="button" style="background-color: #ffff00;">S</button>
+                <button id="s" onclick="kopalkeypress('S')" class="button" style="background-color: #ffff00;">S</button>
                 <div></div>
             </div>
         </div>
